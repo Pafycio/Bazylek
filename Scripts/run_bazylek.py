@@ -1,37 +1,38 @@
 from subprocess import Popen
-import sys
+from sys import argv
 
 
 def bazylek_help():
-    return "0 Param : python run_bazylek.py\n" \
-           "1 Param : python run_bazylek.py <password>\n" \
-           "2 Param : python run_bazylek.py <name> <password>\n" \
-           "HELP    : python run_bazylek.py --help"
+    return "        <  <  <  Bazylek WiFi >  >  >   \n" \
+           "                 ||  USAGE ||  \n" \
+           " - python run_bazylek.py                    -\n" \
+           " - python run_bazylek.py <password>         -\n" \
+           " - python run_bazylek.py <name> <password>  -\n"
 
 name = "ssid="
-key = "key="
+key = ""
 status = False
 
-if len(sys.argv) == 1:
-    name += input("Set network NAME     : ", )
+if len(argv) == 1:
+    name += input("Set network NAME     : ")
     key += input("Set network PASSWORD : ")
     status = True
-elif len(sys.argv) == 2:
-    if sys.argv[1] == '--help' or sys.argv[1] == '-help':
+elif len(argv) == 2:
+    if argv[1] == '--help' or argv[1] == '-help':
         print(bazylek_help())
-    elif len(sys.argv[1]) > 8:
-        name = "ssid=Bazylek"
-        key += sys.argv[1]
+    else:
+        name += "Bazylek"
+        key += argv[1]
         status = True
-elif len(sys.argv) == 3:
-    name += sys.argv[1]
-    key += sys.argv[2]
+elif len(argv) == 3:
+    name += argv[1]
+    key += argv[2]
     status = True
 
-if status:
-    print("Creating hotspot "+name+" !")
-    Popen(['netsh', 'wlan', 'set', 'hostednetwork', 'mode=allow', name, key], shell=True)
+if status and len(key) > 7:
+    print("Creating hotspot !")
+    Popen(['netsh', 'wlan', 'set', 'hostednetwork', 'mode=allow', name, "key="+key], shell=True)
     Popen(['netsh', 'wlan', 'start', 'hostednetwork'], shell=True)
-    print("")
 else:
-    print ("For help type -help or --help")
+    print("Password must be at least 8 chars long !\n"
+          "For help type -help or --help\n")
