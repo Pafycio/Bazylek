@@ -9,7 +9,7 @@ def bazylek_help():
            " | python run_bazylek.py <password>         >\n" \
            " | python run_bazylek.py <name> <password>  >\n"
 
-name = "ssid="
+name = ""
 key = ""
 status = False
 
@@ -22,7 +22,6 @@ elif len(argv) == 2:
     if argv[1] == '--help' or argv[1] == '-help':
         print(bazylek_help())
     else:
-        print ("Creating Hotspot Bazylek < <|> >")
         name += "Bazylek"
         key += argv[1]
         status = True
@@ -32,8 +31,8 @@ elif len(argv) == 3:
     status = True
 
 if status and len(key) > 7:
-    print("Creating hotspot !")
-    Popen(['netsh', 'wlan', 'set', 'hostednetwork', 'mode=allow', name, "key="+key], shell=True)
+    print("Creating hotspot "+name+" < <|> >")
+    Popen(['netsh', 'wlan', 'set', 'hostednetwork', 'mode=allow', "ssid="+name, "key="+key], shell=True)
     Popen(['netsh', 'wlan', 'start', 'hostednetwork'], shell=True)
 else:
     print("Password must be at least 8 chars long !\n"
