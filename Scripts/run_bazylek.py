@@ -18,7 +18,6 @@ if len(argv) == 1:
     key += input("Set network PASSWORD : ")
     status = True
 elif len(argv) == 2:
-    print(argv[1])
     if argv[1] == '--help' or argv[1] == '-help':
         print(bazylek_help())
     else:
