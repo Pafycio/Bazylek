@@ -5,9 +5,9 @@ from sys import argv
 def bazylek_help():
     return "        <  <  <  Bazylek WiFi >  >  >   \n" \
            "                 ||  USAGE ||  \n" \
-           " - python run_bazylek.py                    -\n" \
-           " - python run_bazylek.py <password>         -\n" \
-           " - python run_bazylek.py <name> <password>  -\n"
+           " | python run_bazylek.py                    >\n" \
+           " | python run_bazylek.py <password>         >\n" \
+           " | python run_bazylek.py <name> <password>  >\n"
 
 name = "ssid="
 key = ""
@@ -18,9 +18,11 @@ if len(argv) == 1:
     key += input("Set network PASSWORD : ")
     status = True
 elif len(argv) == 2:
+    print(argv[1])
     if argv[1] == '--help' or argv[1] == '-help':
         print(bazylek_help())
     else:
+        print ("Creating Hotspot Bazylek < <|> >")
         name += "Bazylek"
         key += argv[1]
         status = True
