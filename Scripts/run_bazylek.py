@@ -6,6 +6,7 @@ def bazylek_help():
     return "        <  <  <  Bazylek WiFi >  >  >   \n" \
            "                 ||  USAGE ||  \n" \
            " | python run_bazylek.py                    >\n" \
+           " | python run_bazylek.py -d       - default >\n" \
            " | python run_bazylek.py <password>         >\n" \
            " | python run_bazylek.py <name> <password>  >\n"
 
@@ -20,6 +21,10 @@ if len(argv) == 1:
 elif len(argv) == 2:
     if argv[1] == '--help' or argv[1] == '-help':
         print(bazylek_help())
+    elif argv[1] == "-d" or "-":
+        name += 'Bazylek'
+        key += 'Rozi4321'
+        status = True
     else:
         name += "Bazylek"
         key += argv[1]
